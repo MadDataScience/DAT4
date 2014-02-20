@@ -25,8 +25,8 @@ train.index <- sample(1:N, train.pct * N)       # random sample of records (trai
 train.data <- data[train.index, ]       # perform train/test split
 test.data <- data[-train.index, ]       # note use of neg index...different than Python!
 
-train.labels <- as.factor(as.matrix(labels)[train.index, ])     # extract training set labels
-test.labels <- as.factor(as.matrix(labels)[-train.index, ])     # extract test set labels
+train.labels <- labels[train.index]     # extract training set labels
+test.labels <- labels[-train.index]     # extract test set labels
 
 #################################################
 # APPLY MODEL
