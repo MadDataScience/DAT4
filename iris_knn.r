@@ -67,6 +67,27 @@ results.plot <- results.plot + ggtitle(title)
 # draw results plot (note need for print stmt inside script to draw ggplot)
 print(results.plot)
 
+idx <- sample(nrow(data), nrow(data))
+err.rates <- data.frame(k=factor(), err=numeric())
+for (k in seq(5, 13)){
+  for (i in seq(1, 130, 30)) {
+    test.index <- idx[i:(i+29)]
+    test.data <- data[test.index,]
+    train.data <- data[-test.index,]
+    train.labels <- labels[-test.index]
+    test.labels <- labels[test.index]
+    knn.fit <- knn(train = train.data, test = test.data, 
+                   cl=train.labels, k = k)
+    cat('\n', 'k = ', k, ', train.pct = ', train.pct, '\n', sep='')     # print params
+    print(table(test.labels, knn.fit))          # print confusion matrix
+    
+    this.err <- sum(test.labels != knn.fit) / length(test.labels)    # store gzn err
+    err.rates <- rbind(err.rates, data.frame(k=k, err=this.err))     # append err to total results
+  }  
+}
+ggplot(err.rates, aes(k, err)) + geom_smooth()
+
+
 #################################################
 # NOTES
 #################################################
