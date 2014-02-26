@@ -1,0 +1,673 @@
+Regression: Linear & Logistic
+========================================================
+author: Alessandro Gagliardi
+date: February 26th, 2014
+
+Last Time
+========================================================
+- Intro to Probability & Bayesian Inference
+- The Naïve Bayesian Classifier
+- Document Vectors & Spam Filter
+
+### Questions?
+
+Agenda
+========================================================
+1. Linear Regression
+0. Interlude: the Whickham survey
+1. Logistic Regression
+2. Outcome Variables
+3. Error Terms
+4. Interpreting Results
+5. Logistic Regression vs. Other Classification Techniques
+5. Implementing a Logistic Fit in R
+
+Models
+========================================================
+> The purpose of models is not to fit the data but to sharpen the questions. 
+
+Samuel Karlin (1924-2007), mathematician
+
+Linear Regression
+========================================================
+type: section
+
+Goals
+========================================================
+- Define what a **regression model** is
+- Understand the differences between a simple regression and a polynomial regression
+- Determine an approach to polynomial regression
+- Explain what multicollinearity is
+
+Recall:
+========================================================
+A **regression** model is a functional relationship between input & response variables.
+
+$$ y = \alpha + \beta x + \epsilon $$
+
+$y =$ **response variable** (the one we want to predict)
+
+$x =$ **input variable** (the one we use to train the model)
+
+$\alpha =$ **intercept** (where the line crosses the y-axis)
+
+$\beta =$ **regression coefficient** (the model "parameter")
+
+$\epsilon =$ **residual** (the prediction error)
+
+Ordinary Least Squares
+========================================================
+Q. How do we fit a regression model to a dataset?
+
+A. Minimize the sum of the squared residuals (OLS)
+
+$$ min(||y – \beta x||^2) $$
+
+Aside
+========================================================
+incremental: true
+Why least _squares_?
+
+We want to penalize both positive and negative residuals.
+
+But why squares and not, say, absolute values?
+
+In fact, in the late 18th century, both of these were considered. OLS won because of procedures making it easier to compute by hand. Today, OLS dominates largely for historical reasons though it is also helpful as it allows a direct comparison between the square of the residuals and the square of the standard deviation (or variance) of the model. 
+
+That said, minimizing absolute values may be prefered in cases where there are outliers. (Why?)
+
+Polynomial Regression
+========================================================
+incremental: true
+Consider the following **polynomial regression** model:
+$$ y = \alpha + \beta_1 x + \beta_2 x^2 + \epsilon $$
+
+Q:  This represents a nonlinear relationship. Is it still a linear model?
+
+A:  Yes, because it’s linear in the $\beta$’s!
+
+Polynomial Regression
+========================================================
+> Although *polynomial regression* fits a nonlinear model to the data, as statistical estimation problem it is linear, in the sense that the regression function $E(y|x)$ is linear in the unknown parameters that are estimated from the data. For this reason, polynomial regression is considered to be a special case of multiple linear regression.
+
+(from [Wikipedia](http://en.wikipedia.org/wiki/Polynomial_regression))
+
+Polynomial Regression
+========================================================
+incremental: true
+Polynomial regression allows us to fit very complex curves to data.  
+$$ y = \alpha + \beta_1 x + \beta_2 x^2 + \ldots + \beta_n x^n + \epsilon $$
+
+However, it poses one problem, particularly in comparison to **simple linear regression**
+
+What's the difference between simple linear regression and polynomial regression?
+
+What's the problem that simple regression doesn't have?
+
+Multicollinearity
+========================================================
+**Multicollinearity** is when predictor variables are highly correlated with each other
+
+
+```r
+x <- seq(1, 10, 0.1)
+cor(x^9, x^10)
+```
+
+```
+[1] 0.9988
+```
+
+
+This causes the model to break down because it can't tell the difference between predictor variables
+
+
+
+
+Multicollinearity
+========================================================
+
+```r
+qplot(x^9, x^10)
+```
+
+<img src="DS_Lec11-figure/unnamed-chunk-3.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" style="display: block; margin: auto;" />
+
+
+How we fix multicollinearity
+========================================================
+Replace the correlated predictors with uncorrelated predictors
+
+$$ y = \alpha + \beta_1 f_1(x) + \beta_2 f_2(x^2) + \ldots + \beta_n f_n(x^n) + \epsilon $$
+
+Technical Note: These polynomial functions form an _orthogonal basis_ of the function space.
+
+The R function `poly()` can compute orthogonal polynomials for this purpose. 
+
+poly(raw=TRUE)
+========================================================
+The same plot as before only generated using `poly()` with `raw=TRUE`: 
+
+```r
+ggplot(data.frame(poly(seq(1, 10, 0.1), 10, raw=T)), aes(X9, X10)) + geom_point()
+```
+
+<img src="DS_Lec11-figure/unnamed-chunk-4.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" style="display: block; margin: auto;" />
+
+
+poly(raw=FALSE)
+========================================================
+The same plot as before only generated using `poly()` with `raw=TRUE`: 
+
+```r
+ggplot(data.frame(poly(seq(1, 10, 0.1), 10, raw=F)), aes(X9, X10)) + geom_point()
+```
+
+<img src="DS_Lec11-figure/unnamed-chunk-5.png" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" style="display: block; margin: auto;" />
+
+
+Multicollinearity
+========================================================
+For multicollinearity between variables, we will address this using principal components analysis in an upcoming lecture.
+
+
+Interlude
+========================================================
+type: section
+
+The Whickham survey
+========================================================
+Data on age, smoking, and mortality from a one-in-six survey of the electoral roll in Whickham, in the UK. The survey was conducted in 1972-1974 among women who were classified as current smokers or as never having smoked. A follow-up on those in the survey was conducted twenty years later.  
+
+```
+  outcome smoker age
+1   Alive    Yes  23
+2   Alive    Yes  18
+3    Dead    Yes  71
+4   Alive     No  67
+5   Alive     No  64
+6   Alive    Yes  38
+```
+
+
+Convert categories to binomial values:
+========================================================
+
+```r
+Whickham$outcome <- as.integer(Whickham$outcome == 'Alive')
+lm(outcome ~ 1, Whickham)
+```
+
+```
+
+Call:
+lm(formula = outcome ~ 1, data = Whickham)
+
+Coefficients:
+(Intercept)  
+      0.719  
+```
+
+Modeling the intercept tells us that 71.9% of women surveyed were still alive 20-years later.
+
+Modeling smoker
+========================================================
+Add whether or not the woman was a smoker to the model:
+
+```r
+lm(outcome ~ smoker, Whickham)
+```
+
+```
+
+Call:
+lm(formula = outcome ~ smoker, data = Whickham)
+
+Coefficients:
+(Intercept)    smokerYes  
+     0.6858       0.0754  
+```
+
+...smokers are 7.54% more likely to survive?!?
+
+Modeling smoker + age
+========================================================
+
+```r
+lm(outcome ~ smoker + age, Whickham)
+```
+
+```
+
+Call:
+lm(formula = outcome ~ smoker + age, data = Whickham)
+
+Coefficients:
+(Intercept)    smokerYes          age  
+     1.4726       0.0105      -0.0162  
+```
+
+A 20-year old smoker: $1.47 + 0.01 - 0.016 \times 20 = 1.16$  
+...has a $116\%$ chance of being a live 20-years later??
+
+Probability(?) of Outcome
+========================================================
+![plot of chunk unnamed-chunk-10](DS_Lec11-figure/unnamed-chunk-10.png) 
+
+
+Logistic Regression
+========================================================
+type: section
+
+Goals
+========================================================
+- Define **logistic regression**
+- identify the differences in classification algorithms
+- understand what logistic regression outputs for classification
+
+What is logistic regression?
+========================================================
+incremental: true
+
+**Definition: A generalization** of linear regression used to solve **classification problems**.
+
+**Logistic regression** is used to solve similar problems as KNN or Naïve Bayes.
+
+Logistic Regression
+========================================================
+incremental: true
+In linear regression, we used a set of covariates to predict the value of a **(continuous) outcome variable.**
+
+In logistic regression, we use a set of covariates to predict _probabilities_ of **(binary) class membership.**
+
+These probabilities are then mapped to _class labels_, thus solving the classification problem.
+
+We use logistic regression to convert probabilities...
+========================================================
+![probabilities](assets/logistic_regression1.png)
+
+...into class labels!
+========================================================
+![class labels](assets/logistic_regression2.png)
+
+Probabilities are “snapped” to class labels  
+(e.g. by threshholding at 50%).
+
+Example problems: Logistic Regression
+========================================================
+Credit Transactions: Fraudulent? (Yes, No)
+
+Gender of a user: (boy, girl)
+
+Do I have $x$ disease: (yes, no)
+
+Will a student get the question right on the test? (yes, no)
+
+Logistic vs Linear Regression
+========================================================
+Both of these models work similarly. In fact, we can think of logistic regression as an extension of linear regression.
+
+There are a couple important differences, however
+
+- Difference 1: Outcome Variables
+- Difference 2: Error Terms
+
+Outcome Variables
+========================================================
+type: section
+
+Goals
+========================================================
+- What's the expected output of a logistic regression?
+- What is a conditional mean?
+- How do we interpret the logistic formula?
+
+Outcome Variables
+========================================================
+incremental: true
+The key variable in any regression problem is the **conditional mean** of the outcome variable y given the value of the covariate x:
+
+_Conditional mean_: $E(y|x)$
+
+In linear regression, we assume that this conditional mean is a linear function taking values in $(-\infty, +\infty)$:
+
+$$ E(y|x) = \alpha + \beta x $$
+
+Why we shouldn't use linear regression for classification problems
+========================================================
+Bounds can be greater than 0 and 1
+
+Sometimes extra data can really throw off our thresholds
+
+Impossible to scale/predict when data throws off the regression
+
+Outcome Variables
+========================================================
+incremental: true
+In logistic regression, we’ve seen that the _conditional mean of the outcome variable takes values only in the unit interval [0, 1]_.
+
+0 = negative class (false)
+
+1 = positive class (true)
+
+The first step in extending linear regression to logistic regression is to map the outcome variable $E(y|x)$ into the unit interval.
+
+How do we do this?
+========================================================
+incremental: true
+By using a transformation called the **logistic function**:
+$$ E(y|x) = \pi(x) = \frac{e^{\alpha + \beta x}}{1 + e^{\alpha + \beta x}} $$
+
+We've already seen what this looks like:  
+![probabilities](assets/logistic_regression1.png)
+
+For any value of x, y is in the interval [0, 1]  
+This is a nonlinear transformation!
+
+The Logistic Function
+========================================================
+incremental: true
+The **logit function** is an important transformation of the logistic function. Notice that it returns the linear model!  
+$$ g(x) = ln\left(\frac{\pi(x)}{1-\pi(x)}\right) = \alpha + \beta x $$
+
+Here, $\pi(x)$ ($pi$ of $x$) is the probability of $x$ occuring
+
+(The logit function is also called the **log-odds function**)
+
+Outcome Variables - Review
+========================================================
+The expected outcome for a logistic regression is anywhere in the range of 0 and 1.
+
+A conditional mean just represents the average expected value from a prediction
+
+The logistic formula transformation is what allows us to scale our regression results
+
+Error Terms
+========================================================
+type: section
+
+Goals
+========================================================
+- What's the difference between Gaussian and Bernoulli distributions?
+- Why does it matter?
+
+Linear Regression
+========================================================
+incremental: true
+The second difference between linear regression and the logistic regression model is in the error term.
+
+One of the key assumptions of linear regression is that the error terms follow independent Gaussian distributions with zero mean and constant variance:  
+$$ \epsilon \sim N(0, \sigma^2) $$
+
+OLS vs. MLE
+========================================================
+incremental: true
+Consider the following:  
+
+| Case | Model 1 | Model 2 | Observed Value |
+|:----:|:-------:|:-------:|:----:|
+|   1   |    0.8 |     1.0 | 1 |
+|   2   |    0.1 |     0.0 | 1 |
+|   3   |    0.9 |     1.0 | 1 |
+|   4   |    0.5 |     0.0 | 0 |
+| Sum Sq. Resid | 1.11 | 1.00 |
+
+According to OLS, Model 2 is superior than model _even though Model 2 says it's **impossible** to have an outcome of 1 in case 2_.
+
+Logistic Regression
+========================================================
+incremental: true
+In logistic regression, the outcome variable can take only two values: 0 or 1.
+
+It’s easy to show from this that instead of following a Gaussian distribution, the error term in logistic regression follows a Bernoulli distribution:  
+$$ \epsilon \sim B(0, \pi(1-\pi)) $$
+
+This is the same distribution followed by a coin toss.  
+Think about why this makes sense!
+
+OLS vs. MLE
+========================================================
+incremental: true
+This is no good. If our model says an event is _impossible_ but it happens anyway, _that is not a good model_. 
+
+Remember: we are dealing with probabilities. We should _treat_ them like probabilities.
+
+Model 1: $P(1,1,1,0) = 0.8 \times 0.1 \times 0.9 \times (1-0.5) = 0.036$
+
+Model 2: $P(1,1,1,0) = 1 \times 0 \times 1 \times (1 - 0) = 0$
+
+**Conclusion:** Model 1 is better.
+
+This is called the Maximum Liklihood Estimate or MLE
+
+GLM
+========================================================
+incremental: true
+These two key differences define the logistic regression model, and they also lead us to a kind of unification of regression techniques called **generalized linear models**.
+
+Briefly, GLMs generalize the distribution of the error term, and allow the conditional mean of the response variable to be related to the linear model by a **link function**.
+
+GLM
+========================================================
+incremental: true
+In the present case, the error term follows a Bernoulli distribution, and the logit is the link function that connects us to the linear predictor.
+
+$$ g(x) = ln\left(\frac{\pi(x)}{1-\pi(x)}\right) = \alpha + \beta x $$
+
+Since the Bernoulli distribution and the logit function share a common parameter $\pi$, we say that the logit is the **canonical link function** for the Bernoulli distribution.
+
+Linear Regression using LM in R
+========================================================
+
+```r
+lm(outcome ~ smoker + age, data = Whickham)
+```
+
+```
+
+Call:
+lm(formula = outcome ~ smoker + age, data = Whickham)
+
+Coefficients:
+(Intercept)    smokerYes          age  
+     1.4726       0.0105      -0.0162  
+```
+
+
+Linear Regression using GLM in R
+========================================================
+
+```r
+glm(outcome ~ smoker + age, family = "gaussian", data = Whickham)
+```
+
+```
+
+Call:  glm(formula = outcome ~ smoker + age, family = "gaussian", data = Whickham)
+
+Coefficients:
+(Intercept)    smokerYes          age  
+     1.4726       0.0105      -0.0162  
+
+Degrees of Freedom: 1313 Total (i.e. Null);  1311 Residual
+Null Deviance:	    265 
+Residual Deviance: 161 	AIC: 976
+```
+
+
+Logistic Regression using GLM in R
+========================================================
+
+```r
+glm(outcome ~ smoker + age, family = "binomial", data = Whickham)
+```
+
+```
+
+Call:  glm(formula = outcome ~ smoker + age, family = "binomial", data = Whickham)
+
+Coefficients:
+(Intercept)    smokerYes          age  
+      7.599       -0.205       -0.124  
+
+Degrees of Freedom: 1313 Total (i.e. Null);  1311 Residual
+Null Deviance:	    1560 
+Residual Deviance: 945 	AIC: 951
+```
+
+
+Bernoulli (binomial) Distribution
+========================================================
+<img src="DS_Lec11-figure/unnamed-chunk-14.png" title="plot of chunk unnamed-chunk-14" alt="plot of chunk unnamed-chunk-14" style="display: block; margin: auto;" />
+
+This utilizes logit for our link function.
+
+Error terms - Review
+========================================================
+The Gaussian discribution represents the typical distribution we'd see in a linear regression
+
+The Bernoulli represents the typical distribution we'd see in a logistic regression
+
+Understanding these two distrubutions helps us better understand what should be expected in our outcomes
+
+Interpreting Results
+========================================================
+type: section
+
+Goals
+========================================================
+- What do odds and odds ratio mean?
+- How does an odds ratio help us interpret logistic regression?
+
+Linear Regression Coefficients
+========================================================
+Linear regression coefficients are fairly easy to interpret:
+
+```
+(Intercept)   smokerYes         age 
+    1.47255     0.01047    -0.01616 
+```
+
+$$ y = 1.47 + 0.01 \times (smoker = Yes) - 0.016 \times age $$  
+
+$y$ is the dependant variable
+
+Logistic Regression Coefficients
+========================================================
+incremental: true
+Logistic regression coefficients are less straightforward:
+
+```
+(Intercept)   smokerYes         age 
+     7.5992     -0.2047     -0.1237 
+```
+
+$$ y = 7.599 - 0.205 \times (smoker = Yes) - 0.124 \times age $$
+
+Take our 20-year old smoker:  
+$$ y = 7.6 - 0.2 - 0.123 \times 20 = 4.9 $$  
+
+But what does $y = 4.9$ mean?
+
+Interepeting Results
+========================================================
+incremental: true
+In linear regression, the parameter $\beta$ represents the change in the response variable for a unit change in the covariate.
+
+In logistic regression, $\beta$ represents the change in the logit function for a unit change in the covariate.
+
+$$ \pi(1) = \frac{e^\beta}{1+e^\beta} $$
+
+$$ \frac{e^{4.9}}{1+e^{4.9}} = 0.99 $$
+
+In other words, our 20-year-old smoker has a 99% chance of surviving another 20 years.
+
+Odds
+========================================================
+incremental: true
+"**Odds** are another way of talking about probability $\pi$. Rather than being a number between 0 and 1, an odds is a number between 0 and $\infty$. The odds is calculated as: 
+$$ O(1) = \frac{\pi(1)}{1 - \pi(1)} $$  
+For example:  given a probability 50.0%: $O(1) = ^{0.50}/_{1 - 0.50} = 1$"
+
+(from [Statistical Modeling](http://www.mosaic-web.org/go/StatisticalModeling/))
+
+Odds Ratio
+========================================================
+The **odds ratio** of a binary event is given by the odds of the event divided by the odds of its complement:  
+$$ OR = \frac{O(x=1)}{O(x=0)} = \frac{^{\pi(1)}/_{1 - \pi(1)}}{^{\pi(0)}/_{1 - \pi(0)}} $$
+
+Interepeting Results
+========================================================
+incremental: true
+Substituting the definition of $\pi(x)$ into this equation yields:  
+$$ OR = e^\beta $$
+
+This simple relationship between the odds ratio and the parameter $\beta$ is what makes logistic regression such a powerful tool.
+
+How do we interpret this?
+========================================================
+The odds ratio of a binary event gives the increase in likelihood of an outcome if the event occurs.
+
+
+Example
+========================================================
+incremental: true
+Suppose we are flipping coins.
+
+In this case, we know that the probability of it landing on tails is .5, and the probability of it landing on heads is .5
+
+Therefore, we know our odds ratio is $\frac{^{.5}/_{.5}}{^{.5}/_{.5}}$
+
+# 1
+
+Example
+========================================================
+incremental: true
+Suppose we are interested in mobile purchase behavior. Let $y$ be a class label denoting purchase/no purchase, and let $x$ denote a mobile OS (for example, iOS). Say:  
+$P(purchase|Android) = 69.8\%$ and  
+$P(purchase|iOS) = 83.1\%$ 
+
+* $O_{Android}(1) = \frac{0.698}{0.302} = 2.31$
+* $O_{iOS}(1) = \frac{0.831}{0.179} = 4.6$
+
+In this case, an odds ratio of $^{4.6}/_{2.3} = 2$ indicates that a purchase is twice as likely for an iOS user as for an Android user.
+
+Intrepreting Results - Review
+========================================================
+We measure change using the logit function
+
+Odds let us know how likely some even will occur
+
+An odds ratio provides the change in likelihood for some event
+
+Odds ratio helps us understand how different features effect the final probability!
+
+Logistic Regression vs. Other Classification Techniques
+========================================================
+type: section
+
+Logistic Regression vs KNN
+========================================================
+KNN is always distance based and not (always) a linear relationship
+
+_Logistic regression is a generalization and always linear_
+
+**Generalization**: making for a simpler representation of data given
+
+Logistic Regression vs Naïve Bayes
+========================================================
+Bayes is **generative**: based on general assumptions given about the data to classify answers
+
+_Logistic regression is **discriminative**: classification does not depend completely on the data set_
+
+Implementing a Logistic Fit in R
+========================================================
+type: section
+
+[github.com/eklypse/GA_DS_SF_2014_01/blob/master/logistic_ex.R](https://github.com/eklypse/GA_DS_SF_2014_01/blob/master/logistic_ex.R)
+
+Next Time
+========================================================
+type: section
+Artificial Neural Networks
+-------------------
