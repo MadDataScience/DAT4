@@ -1706,7 +1706,7 @@ div.output_prompt {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="support-vector-machines">Support Vector Machines</h1>
-<p>Instructor: Alessandro Gagliardi<br />TA: Kevin Perko</p>
+<p>Instructor: Alessandro Gagliardi<br>TA: Kevin Perko</p>
 </div>
 </div>
 </div></section>
@@ -1718,24 +1718,24 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="last-time">Last Time:</h2>
+<h2 id="last-time-">Last Time:</h2>
 <ul>
-<li>SciKit-Learn
-<ul>
+<li>SciKit-Learn<ul>
 <li>Training a predictive model on numerical features</li>
 <li>Model evaluation and interpretation</li>
 <li>Cross-validation</li>
 <li>More feature engineering and richer models</li>
-</ul></li>
-<li>Decision Trees
-<ul>
+</ul>
+</li>
+<li>Decision Trees<ul>
 <li>Building Decision Trees</li>
 <li>Optimization Functions</li>
 <li>Preventing Overfit</li>
 <li>Implementing Decision Trees with Scikit-Learn</li>
-</ul></li>
 </ul>
-<h3 id="questions">Questions?</h3>
+</li>
+</ul>
+<h3 id="questions-">Questions?</h3>
 </div>
 </div>
 </div></section>
@@ -1748,21 +1748,21 @@ div.output_prompt {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="agenda">Agenda</h2>
-<ol style="list-style-type: decimal">
-<li>Theory
-<ol style="list-style-type: decimal">
+<ol>
+<li>Theory<ol>
 <li>Intro to Support Vector Machines (SVMs)</li>
 <li>Maximum Margin Hyperplanes</li>
 <li>Slack Variables</li>
 <li>Nonlinear Classification with Kernels</li>
-</ol></li>
-<li>Practice
-<ol style="list-style-type: decimal">
+</ol>
+</li>
+<li>Practice<ol>
 <li>Cross-Validation</li>
 <li>Model Selection with Grid Search</li>
 <li>Learning Curves and the Bias-Variance trade-off</li>
 <li>Final Model Assessment</li>
-</ol></li>
+</ol>
+</li>
 </ol>
 </div>
 </div>
@@ -1786,7 +1786,7 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="what-is-a-support-vector-machine">What is a support vector machine?</h2>
+<h2 id="what-is-a-support-vector-machine-">What is a support vector machine?</h2>
 <p>Support vector machine is an algorithm that generates a linear binary classification using geometric functions</p>
 </div>
 </div>
@@ -1830,7 +1830,7 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="how-is-the-decision-boundary-derived">How is the decision boundary derived?</h2>
+<h2 id="how-is-the-decision-boundary-derived-">How is the decision boundary derived?</h2>
 <p>SVMs use geometric reasoning to determine classification</p>
 </div>
 </div>
@@ -1875,7 +1875,8 @@ div.output_prompt {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="margin-example">Margin: Example</h2>
-<p><img src="assets/margin_01.png" width="600" /> <small>source: <a href="http://shop.oreilly.com/product/9780596802363.do">Data Analysis with Open Source Tools</a>, by Philipp K. Janert. O’Reilly Media, 2011.</small></p>
+<p><img src="assets/margin_01.png" width="600" />
+<small>source: <a href="http://shop.oreilly.com/product/9780596802363.do">Data Analysis with Open Source Tools</a>, by Philipp K. Janert. O’Reilly Media, 2011.</small></p>
 </div>
 </div>
 </div><aside class="notes">
@@ -1907,8 +1908,8 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="if-svm-is-a-linear-classifier-how-can-you-use-it-for-nonlinear-classification">If SVM is a linear classifier, how can you use it for nonlinear classification?</h2>
-<p>Using a clever maneuver called the <strong>kernel trick</strong>.<br /><small>(more on that later)</small></p>
+<h2 id="if-svm-is-a-linear-classifier-how-can-you-use-it-for-nonlinear-classification-">If SVM is a linear classifier, how can you use it for nonlinear classification?</h2>
+<p>Using a clever maneuver called the <strong>kernel trick</strong>.<br><small>(more on that later)</small></p>
 </div>
 </div>
 </div></section><section>
@@ -1918,7 +1919,7 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Nonlinear applications of SVM rely on an implicit (nonlinear) mapping <span class="math">\(\Phi\)</span> that sends vectors from the original feature space <span class="math">\(K\)</span> into a higher-dimensional feature space <span class="math">\(K&#39;\)</span>.</p>
+<p>Nonlinear applications of SVM rely on an implicit (nonlinear) mapping $\Phi$ that sends vectors from the original feature space $K$ into a higher-dimensional feature space $K'$.</p>
 </div>
 </div>
 </div><div class="fragment">
@@ -1928,7 +1929,7 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Nonlinear classification in <span class="math">\(K\)</span> is then obtained by creating a linear decision boundary in <span class="math">\(K&#39;\)</span>.</p>
+<p>Nonlinear classification in $K$ is then obtained by creating a linear decision boundary in $K'$.</p>
 </div>
 </div>
 </div>
@@ -1963,7 +1964,7 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="whats-our-goal-for-optimization">What's our goal for optimization?</h2>
+<h2 id="what-s-our-goal-for-optimization-">What&#39;s our goal for optimization?</h2>
 <p>SVM will always solve for a decision boundary that minimizes generalization error</p>
 </div>
 </div>
@@ -1997,7 +1998,8 @@ div.output_prompt {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="margin-example">Margin: Example</h2>
-<p><img src="assets/margin_01.png" width="600" /> <small>source: <a href="http://shop.oreilly.com/product/9780596802363.do">Data Analysis with Open Source Tools</a>, by Philipp K. Janert. O’Reilly Media, 2011.</small></p>
+<p><img src="assets/margin_01.png" width="600" />
+<small>source: <a href="http://shop.oreilly.com/product/9780596802363.do">Data Analysis with Open Source Tools</a>, by Philipp K. Janert. O’Reilly Media, 2011.</small></p>
 </div>
 </div>
 </div></section><section>
@@ -2063,7 +2065,7 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="this-means-that...">This means that...</h2>
+<h2 id="this-means-that-">This means that...</h2>
 <p>We are always solving for one optimum (global, instead of local optima)</p>
 </div>
 </div>
@@ -2165,7 +2167,7 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Slack variables <span class="math">\(\xi\)</span> generalize the optimization problem to permit some misclassified training records (which come at a cost <span class="math">\(C\)</span>).</p>
+<p>Slack variables $\xi$ generalize the optimization problem to permit some misclassified training records (which come at a cost $C$).</p>
 </div>
 </div>
 </div><div class="fragment">
@@ -2198,7 +2200,7 @@ div.output_prompt {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="example-of-soft-margins">Example of soft margins</h2>
-<p><img src="assets/svm_soft_margins.png" width="600" /><br /><small>source: <a href="http://pyml.sourceforge.net/doc/howto.pdf">pyml.sourceforge.net/doc/howto.pdf</a></small></p>
+<p><img src="assets/svm_soft_margins.png" width="600" /><br><small>source: <a href="http://pyml.sourceforge.net/doc/howto.pdf">pyml.sourceforge.net/doc/howto.pdf</a></small></p>
 </div>
 </div>
 </div></section><section>
@@ -2209,9 +2211,9 @@ div.output_prompt {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="selecting-slack-variables">Selecting slack variables</h2>
-<p>Often, the optimization of slack variables comes between exponentially growing sequences of <span class="math">\(C\)</span></p>
-<p>Higher values of variable <span class="math">\(C =\)</span> higher accuracy in model</p>
-<p>Lower values of <span class="math">\(C =\)</span> training error and better generalization</p>
+<p>Often, the optimization of slack variables comes between exponentially growing sequences of $C$</p>
+<p>Higher values of variable $C =$ higher accuracy in model</p>
+<p>Lower values of $C =$ training error and better generalization</p>
 </div>
 </div>
 </div></section><section>
@@ -2336,9 +2338,9 @@ div.output_prompt {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>remap the feature vectors <span class="math">\(x_i\)</span> into a higher-dimensional space <span class="math">\(K&#39;\)</span></li>
-<li>create a linear decision boundary in <span class="math">\(K&#39;\)</span></li>
-<li>back out the nonlinear decision boundary in <span class="math">\(K\)</span> from the result</li>
+<li>remap the feature vectors $x_i$ into a higher-dimensional space $K'$</li>
+<li>create a linear decision boundary in $K'$</li>
+<li>back out the nonlinear decision boundary in $K$ from the result</li>
 </ul>
 </div>
 </div>
@@ -2362,7 +2364,7 @@ div.output_prompt {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="kernel-trick">Kernel Trick</h2>
-<p>Instead, we use <strong>kernel functions</strong> that map two vectors in a higher-dimensional feature space <span class="math">\(K&#39;\)</span></p>
+<p>Instead, we use <strong>kernel functions</strong> that map two vectors in a higher-dimensional feature space $K'$</p>
 </div>
 </div>
 </div><div class="fragment">
@@ -2416,11 +2418,11 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="some-popular-kernels">Some Popular Kernels:</h2>
-<p>Linear Kernel: <span class="math">\[ k(x,x&#39;) = \langle x,x&#39; \rangle \]</span></p>
-<p>Polynomial Kernel: <span class="math">\[ k(x,x&#39;) = (x^\top x&#39;+1)^d \]</span></p>
-<p>Gaussian Kernel: <span class="math">\[ k(x,x&#39;) = exp(-\gamma||x-x&#39;||^2) \]</span></p>
-<p>Radial Basis Kernel: <span class="math">\[ k(x,x&#39;) = exp(-\frac{||x-x&#39;||^2_2}{2\sigma^2}) \]</span></p>
+<h2 id="some-popular-kernels-">Some Popular Kernels:</h2>
+<p>Linear Kernel: $$ k(x,x') = \langle x,x' \rangle $$</p>
+<p>Polynomial Kernel: $$ k(x,x') = (x^\top x'+1)^d $$</p>
+<p>Gaussian Kernel: $$ k(x,x') = exp(-\gamma||x-x'||^2) $$</p>
+<p>Radial Basis Kernel: $$ k(x,x') = exp(-\frac{||x-x'||^2_2}{2\sigma^2}) $$</p>
 </div>
 </div>
 </div><div class="fragment">
@@ -2430,7 +2432,7 @@ div.output_prompt {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <strong>hyperparameters</strong> <span class="math">\(d, \gamma\)</span> affect the flexibility of the decision boundary.</p>
+<p>The <strong>hyperparameters</strong> $d, \gamma$ affect the flexibility of the decision boundary. </p>
 </div>
 </div>
 </div>
@@ -2490,7 +2492,8 @@ div.output_prompt {
 <div class="text_cell_render border-box-sizing rendered_html">
 <pre><code>cd parallel_ml_tutorial/notebooks  
 ipython notebook  
-02 - Model Selection and Assessment.ipynb</code></pre>
+02 - Model Selection and Assessment.ipynb
+</code></pre>
 </div>
 </div>
 </div>
@@ -2570,7 +2573,7 @@ In&nbsp;[1]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's load a simple dataset of 8x8 gray level images of handwritten digits (bundled in the sklearn source code):</p>
+<p>Let&#39;s load a simple dataset of 8x8 gray level images of handwritten digits (bundled in the sklearn source code):</p>
 </div>
 </div>
 </div>
@@ -2845,7 +2848,7 @@ DwAA8B6BBwAAeO9/4QoWR0mY2K4AAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's visualize the dataset on a 2D plane using a projection on the first 2 axis extracted by Principal Component Analysis:</p>
+<p>Let&#39;s visualize the dataset on a 2D plane using a projection on the first 2 axis extracted by Principal Component Analysis:</p>
 </div>
 </div>
 </div>
@@ -5479,7 +5482,7 @@ MV/SAgDSEzwAQHqCBwBIT/AAAOkJHgAgvf8BgVbO1bjb7voAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To illustrate this, let's train a Support Vector Machine naively on the digits dataset:</p>
+<p>To illustrate this, let&#39;s train a Support Vector Machine naively on the digits dataset:</p>
 </div>
 </div>
 </div>
@@ -5527,8 +5530,8 @@ In&nbsp;[10]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Did we really learn a perfect model that can recognize the correct digit class 100% of the time? <strong>Without new data it's impossible to tell.</strong></p>
-<p>Let's start again and split the dataset into two random, non overlapping subsets:</p>
+<p>Did we really learn a perfect model that can recognize the correct digit class 100% of the time? <strong>Without new data it&#39;s impossible to tell.</strong></p>
+<p>Let&#39;s start again and split the dataset into two random, non overlapping subsets:</p>
 </div>
 </div>
 </div>
@@ -5580,7 +5583,7 @@ test data shape: (450, 64), test target shape: (450,)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's retrain a new model on the first subset call the <strong>training set</strong>:</p>
+<p>Let&#39;s retrain a new model on the first subset call the <strong>training set</strong>:</p>
 </div>
 </div>
 </div>
@@ -5678,10 +5681,12 @@ In&nbsp;[13]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This score is clearly not as good as expected! The model cannot generalize so well to new, unseen data.</p>
 <ul>
-<li><p>Whenever the <strong>test</strong> data score is <strong>not as good as</strong> the <strong>train</strong> score the model is <strong>overfitting</strong></p></li>
-<li><p>Whenever the <strong>train score is not close to 100%</strong> accuracy the model is <strong>underfitting</strong></p></li>
+<li><p>Whenever the <strong>test</strong> data score is <strong>not as good as</strong> the <strong>train</strong> score the model is <strong>overfitting</strong></p>
+</li>
+<li><p>Whenever the <strong>train score is not close to 100%</strong> accuracy the model is <strong>underfitting</strong></p>
+</li>
 </ul>
-<p>Ideally <strong>we want to neither overfit nor underfit</strong>: <code>test_score ~= train_score ~= 1.0</code>.</p>
+<p>Ideally <strong>we want to neither overfit nor underfit</strong>: <code>test_score ~= train_score ~= 1.0</code>. </p>
 </div>
 </div>
 </div>
@@ -5738,7 +5743,7 @@ SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0, degree=3, gamma=0.0,
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's try again with another parameterization:</p>
+<p>Let&#39;s try again with another parameterization:</p>
 </div>
 </div>
 </div>
@@ -6057,19 +6062,22 @@ Mean score: 0.993 (+/-0.001)
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Exercise:</strong></p>
+<p><strong>Exercise:</strong> </p>
 <ul>
 <li>Perform 50 iterations of cross validation with randomly sampled folds of 500 training samples and 500 test samples randomly sampled from <code>X</code> and <code>y</code> (use <code>sklearn.cross_validation.ShuffleSplit</code>).</li>
 <li>Try with <code>SVC(C=1, gamma=0.01)</code></li>
 <li>Plot distribution the test error using an histogram with 50 bins.</li>
 <li>Try to increase the training size</li>
-<li><p>Retry with <code>SVC(C=10, gamma=0.005)</code>, then <code>SVC(C=10, gamma=0.001)</code> with 500 samples.</p></li>
-<li><p>Optional: use a smoothed kernel density estimation <code>scipy.stats.kde.gaussian_kde</code> instead of an histogram to visualize the test error distribution.</p></li>
+<li><p>Retry with <code>SVC(C=10, gamma=0.005)</code>, then <code>SVC(C=10, gamma=0.001)</code> with 500 samples.</p>
+</li>
+<li><p>Optional: use a smoothed kernel density estimation <code>scipy.stats.kde.gaussian_kde</code> instead of an histogram to visualize the test error distribution.</p>
+</li>
 </ul>
 <p>Hints, type:</p>
 <pre><code>from sklearn.cross_validation import ShuffleSplit
 ShuffleSplit?  # to read the docstring of the shuffle split
-plt.hist?  # to read the docstring of the histogram plot</code></pre>
+plt.hist?  # to read the docstring of the histogram plot
+</code></pre>
 </div>
 </div>
 </div><div style=display:none>
@@ -6110,7 +6118,7 @@ In&nbsp;[]:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Cross Validation makes it possible to evaluate the performance of a model class and its hyper parameters on the task at hand.</p>
-<p>A natural extension is thus to run CV several times for various values of the parameters so as to find the best. For instance, let's fix the SVC parameter to <code>C=10</code> and compute the cross validated test score for various values of <code>gamma</code>:</p>
+<p>A natural extension is thus to run CV several times for various values of the parameters so as to find the best. For instance, let&#39;s fix the SVC parameter to <code>C=10</code> and compute the cross validated test score for various values of <code>gamma</code>:</p>
 </div>
 </div>
 </div>
@@ -7206,12 +7214,14 @@ sEEjIiIimmDYoBERERFNMGzQiIiIiCaY/wcSGHC9XaWv8QAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see that, <strong>for this model class, on this unscaled dataset</strong>: when <code>C=10</code>, <strong>there is a sweet spot region for gamma around <span class="math">\(10^{-4}\)</span> to <span class="math">\(10^{-3}\)</span></strong>. Both the train and test scores are high (low errors).</p>
+<p>We can see that, <strong>for this model class, on this unscaled dataset</strong>: when <code>C=10</code>, <strong>there is a sweet spot region for gamma around $10^{-4}$ to $10^{-3}$</strong>. Both the train and test scores are high (low errors).</p>
 <ul>
-<li><p>If <strong>gamma is too low, train score is low</strong> (and thus test scores too as it generally cannot be better than the train score): the model is not expressive enough to represent the data: the model is in an <strong>underfitting regime</strong>.</p></li>
-<li><p>If <strong>gamma is too high</strong>, train score is ok but there is a high discrepency between test and train score. The model is learning the training data and its noise by heart and fails to generalize to new unseen data: the model is in an <strong>overfitting regime</strong>.</p></li>
+<li><p>If <strong>gamma is too low, train score is low</strong> (and thus test scores too as it generally cannot be better than the train score): the model is not expressive enough to represent the data: the model is in an <strong>underfitting regime</strong>.</p>
+</li>
+<li><p>If <strong>gamma is too high</strong>, train score is ok but there is a high discrepency between test and train score. The model is learning the training data and its noise by heart and fails to generalize to new unseen data: the model is in an <strong>overfitting regime</strong>.</p>
+</li>
 </ul>
-<p>We can do the same kind analysis to identify good values for C when gamma is fixed to <span class="math">\(10^{-3}\)</span>:</p>
+<p>We can do the same kind analysis to identify good values for C when gamma is fixed to $10^{-3}$:</p>
 </div>
 </div>
 </div>
@@ -7883,7 +7893,7 @@ iEgM0eJMREREJIb8fyeVM4qof0tNAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Doing this procedure several for each parameter combination is tedious, hence it's possible to automate the procedure by computing the test score for all possible combinations of parameters using the <code>GridSearchCV</code> helper.</p>
+<p>Doing this procedure several for each parameter combination is tedious, hence it&#39;s possible to automate the procedure by computing the test score for all possible combinations of parameters using the <code>GridSearchCV</code> helper.</p>
 </div>
 </div>
 </div>
@@ -7947,7 +7957,7 @@ In&nbsp;[27]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As Grid Search is a costly procedure, let's do the some experiments with a smaller dataset:</p>
+<p>As Grid Search is a costly procedure, let&#39;s do the some experiments with a smaller dataset:</p>
 </div>
 </div>
 </div><div class="fragment">
@@ -8047,7 +8057,7 @@ In&nbsp;[30]:
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's define a couple of helper function to help us introspect the details of the grid search outcome:</p>
+<p>Let&#39;s define a couple of helper function to help us introspect the details of the grid search outcome:</p>
 </div>
 </div>
 </div>
@@ -8216,7 +8226,7 @@ In&nbsp;[33]:
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Exercise</strong>:</p>
-<ol style="list-style-type: decimal">
+<ol>
 <li>Find a set of parameters for an <code>sklearn.tree.DecisionTreeClassifier</code> on the <code>X_small_train</code> / <code>y_small_train</code> digits dataset to reach at least 75% accuracy on the sample dataset (500 training samples)</li>
 <li>In particular you can grid search good values for <code>criterion</code>, <code>min_samples_split</code> and <code>max_depth</code></li>
 <li>Which parameter(s) seems to be the most important to tune?</li>
@@ -8234,7 +8244,8 @@ print(DecisionTreeClassifier())  # to show the list of default values
 
 from sklearn.ensemble.ExtraTreesClassifier
 ExtraTreesClassifier? 
-print(ExtraTreesClassifier())</code></pre>
+print(ExtraTreesClassifier())
+</code></pre>
 </div>
 </div>
 </div><div style=display:none>
@@ -8275,7 +8286,7 @@ In&nbsp;[]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In order to better understand the behavior of model (model class + contructor parameters), is it possible to run several cross validation steps for various random sub-samples of the training set and then plot the mean training and test errors.</p>
 <p>These plots are called the <strong>learning curves</strong>.</p>
-<p>sklearn does not yet provide turn-key utilities to plot such learning curves but is not very complicated to compute them by leveraging the <code>ShuffleSplit</code> class. First let's define a range of data set sizes for subsampling the training set:</p>
+<p>sklearn does not yet provide turn-key utilities to plot such learning curves but is not very complicated to compute them by leveraging the <code>ShuffleSplit</code> class. First let&#39;s define a range of data set sizes for subsampling the training set:</p>
 </div>
 </div>
 </div>
@@ -8320,7 +8331,7 @@ array([ 100,  177,  316,  562, 1000])
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For each training set sizes we will compute <code>n_iter</code> cross validation iterations. Let's pre-allocate the arrays to store the results:</p>
+<p>For each training set sizes we will compute <code>n_iter</code> cross validation iterations. Let&#39;s pre-allocate the arrays to store the results:</p>
 </div>
 </div>
 </div>
@@ -9124,8 +9135,10 @@ UsIMZJIkSQkzkEmSJCXMQCZJkpQwA5kkSVLCfgDMJtVmG1f/JgAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><p>If the <strong>training set error is high</strong> (e.g. more than 5% misclassification) at the end of the learning curve, the model suffers from <strong>high bias</strong> and is said to <strong>underfit</strong> the training set.</p></li>
-<li><p>If the <strong>testing set error is significantly larger than the training set error</strong>, the model suffers from <strong>high variance</strong> and is said to <strong>overfit</strong> the training set.</p></li>
+<li><p>If the <strong>training set error is high</strong> (e.g. more than 5% misclassification) at the end of the learning curve, the model suffers from <strong>high bias</strong> and is said to <strong>underfit</strong> the training set.</p>
+</li>
+<li><p>If the <strong>testing set error is significantly larger than the training set error</strong>, the model suffers from <strong>high variance</strong> and is said to <strong>overfit</strong> the training set.</p>
+</li>
 </ul>
 <p>Another possible source of high training and testing error is label noise: the data is too noisy and there is nothing few signal learn from it.</p>
 </div>
@@ -9149,12 +9162,12 @@ UsIMZJIkSQkzkEmSJCXMQCZJkpQwA5kkSVLCfgDMJtVmG1f/JgAAAABJRU5ErkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>Try to get rid of noisy features using <strong>feature selection</strong> methods (or better let the model do it if the regularization is able to do so: for instance l1 penalized linear models)</li>
-<li>Try to tune parameters to add <strong>more regularization</strong>:
-<ul>
+<li>Try to tune parameters to add <strong>more regularization</strong>:<ul>
 <li>Smaller values of <code>C</code> for SVM</li>
 <li>Larger values of <code>alpha</code> for penalized linear models</li>
 <li>Restrict to shallower trees (decision stumps) and lower numbers of samples per leafs for tree-based models</li>
-</ul></li>
+</ul>
+</li>
 <li>Try <strong>simpler model families</strong> such as penalized linear models (e.g. Linear SVM, Logistic Regression, Naive Bayes)</li>
 <li>Try the ensemble strategies that <strong>average several independently trained models</strong> (e.g. bagging or blending ensembles): average the predictions of independently trained models</li>
 <li>Collect more <strong>labeled samples</strong> if the learning curves of the test score has a non-zero slope on the right hand side.</li>
@@ -9179,24 +9192,24 @@ UsIMZJIkSQkzkEmSJCXMQCZJkpQwA5kkSVLCfgDMJtVmG1f/JgAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Give <strong>more freedom</strong> to the model by relaxing some parameters that act as regularizers:
-<ul>
+<li>Give <strong>more freedom</strong> to the model by relaxing some parameters that act as regularizers:<ul>
 <li>Larger values of <code>C</code> for SVM</li>
 <li>Smaller values of <code>alpha</code> for penalized linear models</li>
 <li>Allow deeper trees and lower numbers of samples per leafs for tree-based models</li>
-</ul></li>
-<li>Try <strong>more complex / expressive model families</strong>:
-<ul>
+</ul>
+</li>
+<li>Try <strong>more complex / expressive model families</strong>:<ul>
 <li>Non linear kernel SVMs,</li>
 <li>Ensemble of Decision Trees...</li>
-</ul></li>
-<li><strong>Construct new features</strong>:
-<ul>
+</ul>
+</li>
+<li><strong>Construct new features</strong>:<ul>
 <li>bi-gram frequencies for text classifications</li>
 <li>feature cross-products (possibly using the hashing trick)</li>
 <li>unsupervised features extraction (e.g. triangle k-means, auto-encoders...)</li>
 <li>non-linear kernel approximations + linear SVM instead of simple linear SVM</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -9302,7 +9315,7 @@ Test score: 0.984
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is because once normalized, the digits is very regular and fits the assumptions of the default parameters of the <code>SVC</code> class very well. This is rarely the case though and usually it's always necessary to grid search the parameters.</p>
+<p>This is because once normalized, the digits is very regular and fits the assumptions of the default parameters of the <code>SVC</code> class very well. This is rarely the case though and usually it&#39;s always necessary to grid search the parameters.</p>
 <p>Nonetheless, <strong>scaling should be a mandatory preprocessing step when using SVC, especially with a RBF kernel</strong>.</p>
 </div>
 </div>
@@ -9316,9 +9329,9 @@ Test score: 0.984
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="labhomework">Lab/Homework</h1>
-<pre><code>03 - Distributed Model Selection and Assessment</code></pre>
-<p>How to use <code>IPython.parallel</code> (e.g. StarCluster) to distribute model selection and assessment across many engines.</p>
+<h1 id="lab-homework">Lab/Homework</h1>
+<pre><code>03 - Distributed Model Selection and Assessment
+</code></pre><p>How to use <code>IPython.parallel</code> (e.g. StarCluster) to distribute model selection and assessment across many engines.</p>
 </div>
 </div>
 </div></section>
